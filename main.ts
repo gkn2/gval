@@ -55,6 +55,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.moneyyyy, function (sprite, othe
     sprites.destroy(otherSprite)
     item_spawn()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cropsss, function (sprite, otherSprite) {
+    crops += 1
+    sprites.destroy(otherSprite)
+    item_spawn()
+})
 function water () {
     liquid = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -124,6 +129,11 @@ function farm () {
         `, SpriteKind.cropsss)
     crops2.setScale(0.65, ScaleAnchor.Middle)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    liquid2 += 1
+    sprites.destroy(otherSprite)
+    item_spawn()
+})
 function item_spawn () {
     list = [
     meds,
@@ -136,8 +146,8 @@ function item_spawn () {
 let list: Sprite[] = []
 let crops2: Sprite = null
 let liquid2 = 0
-let crops = 0
 let liquid: Sprite = null
+let crops = 0
 let cash2 = 0
 let meds2 = 0
 let cash: Sprite = null
