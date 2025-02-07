@@ -6,42 +6,43 @@ namespace SpriteKind {
 function mc () {
     mySprite = sprites.create(img`
         . . . . . . f f f f . . . . . . 
-        . . . . f f f 2 2 f f f . . . . 
-        . . . f f f 2 2 2 2 f f f . . . 
-        . . f f f e e e e e e f f f . . 
-        . . f f e 2 2 2 2 2 2 e e f . . 
-        . . f e 2 f f f f f f 2 e f . . 
-        . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
-        . . f e e d d d d d d e e f . . 
-        . . . f e e 4 4 4 4 e e f . . . 
-        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
-        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
-        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f . . f f . . . . . 
+        . . . . f f f f f f f f . . . . 
+        . . . f f f f f f f f f f . . . 
+        . . f f f f f f f f f f f f . . 
+        . . f f f f f d d f f f f f . . 
+        . . f f f f d d d d f f f f . . 
+        . . f f f d e d d e d f f f . . 
+        . f f f d b f d d f b d f f f . 
+        . f f f d 1 f d d f 1 d f f f . 
+        . . f f f f d 2 2 d f f f f . . 
+        . . . f f f f f f f f f f . . . 
+        . . e d e e f f f f e e d e . . 
+        . . d d e e e f f e e e d d . . 
+        . . d d e e e e e e e d d d . . 
+        . . . . . d d e e d d . . . . . 
+        . . . . . d d . . d d . . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(mySprite)
 }
 function medications () {
     meds = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . 
+        f f f f f f f f f f f f f f f f f 
+        f 1 1 1 1 2 2 2 2 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 2 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 1 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 1 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 1 1 1 1 1 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 1 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 1 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 2 2 2 2 1 1 1 1 f 
+        f 1 1 1 1 2 2 2 2 2 2 2 1 1 1 1 f 
+        f f f f f f f f f f f f f f f f f 
+        . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . . 
         `, SpriteKind.med)
     otherSprite = 0
     cash.setScale(0.65, ScaleAnchor.Middle)
@@ -49,6 +50,7 @@ function medications () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.med, function (sprite, otherSprite) {
     meds2 += 1
     sprites.destroy(otherSprite)
+    item_spawn()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.moneyyyy, function (sprite, otherSprite) {
     cash2 += 1
@@ -89,22 +91,25 @@ function Initial_amounts () {
 }
 function money () {
     cash = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        ......7..7......
+        ......7..7......
+        .....77777777...
+        ....7.7..7......
+        ...7..7..7......
+        ..7...7..7......
+        ..7...7..7......
+        ...7..7..7......
+        ....7.7..7......
+        .....777777.....
+        ......7..7.7....
+        ......7..7..7...
+        ......7..7...7..
+        ......7..7...7..
+        ......7..7..7...
+        ......7..7.7....
+        ...77777777.....
+        ......7..7......
+        ......7..7......
         `, SpriteKind.moneyyyy)
     cash.setScale(0.65, ScaleAnchor.Middle)
 }
@@ -154,6 +159,7 @@ let cash: Sprite = null
 let otherSprite = 0
 let meds: Sprite = null
 let mySprite: Sprite = null
+mc()
 water()
 farm()
 money()
