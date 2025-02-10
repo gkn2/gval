@@ -44,8 +44,8 @@ function medications () {
         . . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . . 
         `, SpriteKind.med)
-    otherSprite = 0
     cash.setScale(0.65, ScaleAnchor.Middle)
+    mySprite.vy = 25
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.med, function (sprite, otherSprite) {
     meds2 += 1
@@ -64,24 +64,29 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.cropsss, function (sprite, other
 })
 function water () {
     liquid = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        ....................
+        ....................
+        ....................
+        ....................
+        ....................
+        .....ffffffffff.....
+        ....f1811111111f....
+        ....f1111111111f....
+        .....f66666666f.....
+        .....f99999999f.....
+        ....f9999999999f....
+        ....f9999999999f....
+        ....f9999999999f....
+        ....f9999999999f....
+        ....f9999999999f....
+        ....f9999999999f....
+        ....f9999999999f....
+        .....f11111111f.....
+        ......ffffffff......
+        ....................
         `, SpriteKind.Food)
     liquid.setScale(0.65, ScaleAnchor.Middle)
+    mySprite.vy = 25
 }
 function Initial_amounts () {
     meds2 = 5
@@ -112,27 +117,29 @@ function money () {
         ......7..7......
         `, SpriteKind.moneyyyy)
     cash.setScale(0.65, ScaleAnchor.Middle)
+    mySprite.vy = 25
 }
 function farm () {
     crops2 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . 5 5 
+        . . . . . 7 7 . . . . . 5 5 5 5 
+        . . . . 7 7 . . . . . 5 5 5 5 . 
+        . . . 7 7 . . . . 5 5 5 5 5 5 . 
+        . . 7 7 . . . . 5 5 5 5 5 5 . . 
+        . 7 7 . . . . 5 5 5 5 5 5 . . . 
+        . 7 . . . 5 5 5 5 5 5 5 5 . . . 
+        . 7 . . 5 5 5 5 5 5 5 5 . . . . 
+        . 7 . 5 5 5 5 5 5 5 5 . . . . . 
+        . 7 5 5 5 5 5 5 5 5 . . . . . . 
+        . 7 5 5 5 5 5 5 5 5 . . . 7 7 . 
+        . 7 5 5 5 5 5 5 5 . . . 7 7 . . 
+        7 7 5 5 5 5 5 5 . . . 7 7 . . . 
+        7 7 5 5 5 5 5 . . . 7 7 . . . . 
+        7 7 7 7 7 7 7 7 7 7 7 . . . . . 
+        7 7 7 7 . . . . . . . . . . . . 
         `, SpriteKind.cropsss)
     crops2.setScale(0.65, ScaleAnchor.Middle)
+    mySprite.vy = 25
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     liquid2 += 1
@@ -156,7 +163,6 @@ let crops = 0
 let cash2 = 0
 let meds2 = 0
 let cash: Sprite = null
-let otherSprite = 0
 let meds: Sprite = null
 let mySprite: Sprite = null
 mc()
