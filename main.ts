@@ -57,13 +57,21 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.moneyyyy, function (sprite, othe
     sprites.destroy(otherSprite)
     item_spawn()
 })
+function virus () {
+    game.splash("A VIRUS has spread throughout the city!", "POPULATION'S HEALTH IMPACTED! ")
+    meds2 += randint(-1, -3)
+}
+function drought () {
+    game.splash("There is a DROUGHT in the city!", "CITY WATER SUPPLY IMPACTED! ")
+    liquid += randint(-1, -3)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cropsss, function (sprite, otherSprite) {
     crops += 1
     sprites.destroy(otherSprite)
     item_spawn()
 })
 function water () {
-    liquid = sprites.create(img`
+    liquid2 = sprites.create(img`
         ....................
         ....................
         ....................
@@ -85,14 +93,14 @@ function water () {
         ......ffffffff......
         ....................
         `, SpriteKind.Food)
-    liquid.setScale(0.65, ScaleAnchor.Middle)
+    liquid2.setScale(0.65, ScaleAnchor.Middle)
     mySprite.vy = 25
 }
 function Initial_amounts () {
     meds2 = 5
     cash2 = 5
     crops = 5
-    liquid2 = 5
+    liquid = 5
 }
 function money () {
     cash = sprites.create(img`
@@ -141,8 +149,12 @@ function farm () {
     crops2.setScale(0.65, ScaleAnchor.Middle)
     mySprite.vy = 25
 }
+function crop_failure () {
+    game.splash("A FAMINE has begun in the city!", "CITY FOOD SUPPLY IMPACTED! ")
+    crops += randint(-1, -3)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    liquid2 += 1
+    liquid += 1
     sprites.destroy(otherSprite)
     item_spawn()
 })
@@ -150,16 +162,21 @@ function item_spawn () {
     list = [
     meds,
     crops2,
-    liquid,
+    liquid2,
     cash
     ]
     tiles.placeOnRandomTile(list._pickRandom(), assets.tile`transparency16`)
 }
+function Inflation () {
+    game.splash("Inflation has gone rampant in the city!", "ECONOMY IMPACTED! ")
+    cash2 += randint(-1, -3)
+}
+let disasters: number[] = []
 let list: Sprite[] = []
 let crops2: Sprite = null
-let liquid2 = 0
-let liquid: Sprite = null
+let liquid2: Sprite = null
 let crops = 0
+let liquid = 0
 let cash2 = 0
 let meds2 = 0
 let cash: Sprite = null
@@ -172,3 +189,37 @@ money()
 medications()
 Initial_amounts()
 item_spawn()
+game.onUpdateInterval(20000, function () {
+    let v = 0
+    let i = 0
+    let d = 0
+    let cf = 0
+    disasters = [
+    cf,
+    d,
+    i,
+    v
+    ]
+    if (disasters._pickRandom() == cf) {
+        crop_failure()
+    } else if (disasters._pickRandom() == d) {
+        drought()
+    } else if (disasters._pickRandom() == i) {
+        Inflation()
+    } else if (disasters._pickRandom() == v) {
+        virus()
+    }
+    if (cash2 == 0) {
+        game.gameOver(false)
+        game.showLongText("GAME OVER!  Your Economy has been COMPLETELY DESTROYED. The city's population puts you at fault for poorly managing the economy.  The citizens have decided to overthrow you, and take matters into their own hands.   ", DialogLayout.Center)
+    } else if (crops == 0) {
+        game.gameOver(false)
+        game.showLongText("GAME OVER!  You have ZERO Food in your city. The city's population puts you at fault for poorly managing the their food resources.  The citizens have decided to overthrow you, and take matters into their own hands.   ", DialogLayout.Center)
+    } else if (liquid == 0) {
+        game.gameOver(false)
+        game.showLongText("GAME OVER!  You have ZERO Water in your city. The city's population puts you at fault for poorly managing their water resources.  The citizens have decided to overthrow you, and take matters into their own hands.   ", DialogLayout.Center)
+    } else if (meds2 == 0) {
+        game.gameOver(false)
+        game.showLongText("GAME OVER!  You have ZERO Medications in your city. The city's population puts you at fault for poorly managing their medcicinal resources.  The citizens have decided to overthrow you, and take matters into their own hands.   ", DialogLayout.Center)
+    }
+})
